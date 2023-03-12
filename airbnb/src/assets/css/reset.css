@@ -1,0 +1,10 @@
+/* 这里写的样式可以覆盖normalize.css里的东西 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
