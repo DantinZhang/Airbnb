@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import 'normalize.css';  //先引入模板
-import '@/assets/css/reset.css' //引入自定义样式
+import 'assets/css/reset.css' //引入自定义样式
 import store from '@/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
