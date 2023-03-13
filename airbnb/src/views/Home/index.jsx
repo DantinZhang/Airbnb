@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import hyRequest from '@/api';
+import HomeRotation from './c-cpns/home-rotation';
 
 const Home = memo(() => {
 
@@ -11,7 +12,7 @@ const Home = memo(() => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <HomeRotation />
     </div>
   )
 })
