@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import App from './App';
 import 'normalize.css';  //先引入模板
-import 'assets/css/reset.css' //引入自定义样式
+import 'assets/css/reset.less' //引入自定义样式
 import store from '@/store';
 import theme from './assets/theme';
 
