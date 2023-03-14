@@ -6,6 +6,11 @@ const ItemWrapper = styled.div`
   box-sizing: border-box;
   width: ${props => props.itemWidth};
   padding: 8px;
+  border-radius: 10px;
+  ${props => props.theme.mixin.boxShadow}
+  &:hover {
+    cursor: pointer;
+  }
 
   .inner {
     width: 100%;
@@ -35,6 +40,7 @@ const ItemWrapper = styled.div`
   }
 
   .name {
+    line-height: 24px;
     font-size: 16px;
     font-weight: 700;
 
@@ -60,8 +66,15 @@ const ItemWrapper = styled.div`
       margin: 0 2px 0 4px;
     }
 
-    .MuiRating-decimal {
-      margin-right: -2px;
+    .css-dev-only-do-not-override-ph9edi {
+      margin-right: 5px;
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: ${props => props.theme.color.secondaryColor};
+    }
+
+    .ant-rate-star {
+      margin-right: 2px;
     }
   }
 `
