@@ -10,6 +10,10 @@ class HYRequest {
 
         this.instance.interceptors.response.use(res => {
             return res.data;
+        }, err => {
+            alert(err);
+            //全部异常均在此捕获，返回pending状态的promise
+            return new Promise(() => {});
         })
     }
 

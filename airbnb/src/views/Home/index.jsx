@@ -1,19 +1,30 @@
 import React, { memo, useEffect } from 'react';
-import hyRequest from '@/api';
+import { getGoodPriceInfo } from '@/store/modules/home';
 import HomeRotation from './c-cpns/home-rotation';
+import HomeWrapper from './style';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 const Home = memo(() => {
+  let dispatch = useDispatch();
+  let {goodPriceInfo} = useSelector((state) => {
+    return {
+      goodPriceInfo: state.home.goodPriceInfo,
+    }
+  }, shallowEqual)
 
   useEffect(() => {
-    hyRequest.get({url:'/home/highscore'}).then(res => {
-      console.log(res);
-    })
+    dispatch(getGoodPriceInfo());
   },[])
 
   return (
-    <div>
+    <HomeWrapper>
       <HomeRotation />
-    </div>
+      <div className="content">
+        <div>{goodPriceInfo.title}</div>
+        <div>我是房源</div>
+        <div>我是房源</div>
+      </div>
+    </HomeWrapper>
   )
 })
 
