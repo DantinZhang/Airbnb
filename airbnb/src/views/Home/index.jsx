@@ -3,10 +3,11 @@ import { getGoodPriceInfo } from '@/store/modules/home';
 import HomeRotation from './c-cpns/home-rotation';
 import HomeWrapper from './style';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import HomeSection1 from './c-cpns/home-section1';
 
 const Home = memo(() => {
   let dispatch = useDispatch();
-  let {goodPriceInfo} = useSelector((state) => {
+  let { goodPriceInfo } = useSelector((state) => {
     return {
       goodPriceInfo: state.home.goodPriceInfo,
     }
@@ -14,15 +15,13 @@ const Home = memo(() => {
 
   useEffect(() => {
     dispatch(getGoodPriceInfo());
-  },[])
+  }, [])
 
   return (
     <HomeWrapper>
       <HomeRotation />
       <div className="content">
-        <div>{goodPriceInfo.title}</div>
-        <div>我是房源</div>
-        <div>我是房源</div>
+        <HomeSection1 goodPriceInfo={goodPriceInfo} />
       </div>
     </HomeWrapper>
   )

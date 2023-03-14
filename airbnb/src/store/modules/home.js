@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import {reqGoodPriceInfo} from '@/api/modules/home'
 
 export const getGoodPriceInfo = createAsyncThunk('reqdata',async () => {
@@ -10,7 +11,7 @@ export const getGoodPriceInfo = createAsyncThunk('reqdata',async () => {
 const homeSlice = createSlice({
     name: 'home',
     initialState: {
-        goodPriceInfo: []
+        goodPriceInfo: {}
     },
     reducers: {
         changeGoodPriceInfo(state, action) {
