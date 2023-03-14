@@ -7,8 +7,15 @@ const LeftWrapper = styled.div`
     color: ${props => props.theme.color.primaryColor};
     
     .logo {
+        display: flex;
+        align-items: center;
         margin-left: 24px;
         cursor: pointer;
+        img {
+            margin-left: 12px;
+            width: 162px;
+            height: 20px;
+        }
     }
 `
 

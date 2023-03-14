@@ -1,10 +1,31 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+
+
 import RightWrapper from './style';
 import IconGlobal from '@/assets/svg/icon_global';
 import IconMenu from '@/assets/svg/icon_menu';
 import IconAvatar from '@/assets/svg/icon_avatar';
 
 const HeaderRight = memo(() => {
+  const [showPanel, setShowPanel] = useState(false);
+
+  useEffect(() => {
+    //监听window的点击
+    window.addEventListener('click', handleWindowClick)
+    return () => {
+      window.removeEventListener('click', handleWindowClick)
+    }
+  }, [])
+
+  function handleWindowClick() {
+    setShowPanel(false);
+  }
+
+  function handleShowPanel(e) {
+    e.stopPropagation(); //阻止事件冒泡（不然会冒到window的点击事件）
+    setShowPanel(!showPanel);
+  }
+
   return (
     <RightWrapper>
       <div className='btns'>
@@ -15,20 +36,22 @@ const HeaderRight = memo(() => {
         </span>
       </div>
 
-      <div className='profile'>
+      <div className='profile' onClick={e => handleShowPanel(e)}>
         <IconMenu />
         <IconAvatar />
-        <div className='panel'>
-          <div className='top'>
-            <div className='item register'>注册</div>
-            <div className='item login'>登录</div>
-          </div>
-          <div className='bottom'>
-            <div className='item'>出租房源</div>
-            <div className='item'>开展体验</div>
-            <div className='item'>帮助</div>
-          </div>
-        </div>
+        {showPanel && (
+          <div className='panel'>
+            <div className='top'>
+              <div className='item register'>注册</div>
+              <div className='item login'>登录</div>
+            </div>
+            <div className='bottom'>
+              <div className='item'>出租房源</div>
+              <div className='item'>开展体验</div>
+              <div className='item'>帮助</div>
+            </div>
+          </div>)
+        }
       </div>
     </RightWrapper>
   )
