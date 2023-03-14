@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 
 const AppFooter = memo(() => {
   return (
-    <div>AppFooter</div>
+    <div>
+      <h1>AppFooterAppFooter</h1>
+    </div>
   )
 })
 
