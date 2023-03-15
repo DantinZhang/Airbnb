@@ -6,7 +6,7 @@ import { Rate } from 'antd';
 
 const RoomItem = memo((props) => {
     // itemWidth参数用于决定当前一行几个元素
-    let { itemData, itemWidth = '20%' } = props;
+    let { itemData, itemWidth } = props;
     return (
         <ItemWrapper
             verifyColor={itemData?.verify_info?.text_color || "#39576a"}

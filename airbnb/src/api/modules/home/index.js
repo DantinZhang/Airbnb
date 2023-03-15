@@ -16,3 +16,11 @@ export const reqGoodPriceInfo = () => {
         url: '/home/goodprice',
     })
 }
+
+//折扣数据
+export const reqDiscountInfo = () => {
+    return hyRequest.request({
+        method: 'get',
+        url: '/home/discount',
+    })
+}
