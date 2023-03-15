@@ -1,13 +1,10 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo,  useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { reqHomeData } from '@/store/modules/home';
 import HomeRotation from './c-cpns/home-rotation';
 import HomeWrapper from './style';
 import HomeSection1 from './c-cpns/home-section1';
-import SectionHeader from '@/components/section-header';
-import SectionRooms from '@/components/section-rooms';
-import SectionTabs from '@/components/section-tabs';
 import HomeSection2 from './c-cpns/home-section2';
 
 const Home = memo(() => {
@@ -28,9 +25,10 @@ const Home = memo(() => {
     <HomeWrapper>
       <HomeRotation />
       <div className="content">
-        <HomeSection2 section2Data={discountInfo}/>
-        <HomeSection1 sectionData={highScoreInfo} itemWidth='20%' />
-        <HomeSection1 sectionData={goodPriceInfo} itemWidth='25%' />
+        {/* 优化：请求到数据之后再渲染组件，这样就少渲染一次 */}
+        {Object.keys(discountInfo).length > 0 && <HomeSection2 section2Data={discountInfo}/>}
+        {Object.keys(highScoreInfo).length > 0 && <HomeSection1 sectionData={highScoreInfo} itemWidth='20%' />}
+        {Object.keys(goodPriceInfo).length > 0 && <HomeSection1 sectionData={goodPriceInfo} itemWidth='25%' />}
       </div>
     </HomeWrapper>
   )

@@ -12,10 +12,12 @@ const HomeSection2 = memo((props) => {
     const { section2Data } = props;
 
     //定义name初始值
-    let [name, setName] = useState('佛山');
+    let initialName = section2Data.dest_address?.[0].name
+    let [name, setName] = useState(initialName);
     
     //把所有名字传给组件，方便tab展示
     let tabNames = section2Data.dest_list && Object.keys(section2Data.dest_list);
+    console.log(tabNames);
 
     //useCallback性能优化，传给tab一个函数，拿到当前点击的name
     const changeTabData = useCallback(function (name) {
@@ -32,6 +34,8 @@ const HomeSection2 = memo((props) => {
     )
 })
 
-HomeSection2.propTypes = {}
+HomeSection2.propTypes = {
+    section2Data: PropTypes.object
+}
 
 export default HomeSection2
