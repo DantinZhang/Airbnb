@@ -6,6 +6,7 @@ import SectionTabs from '@/components/section-tabs';
 import SectionRooms from '@/components/section-rooms';
 
 import SectionWrapper from './style'
+import SectionFooter from '@/components/section-footer';
 
 const HomeSection2 = memo((props) => {
     //拿到home请求到的当前模块数据
@@ -30,6 +31,7 @@ const HomeSection2 = memo((props) => {
             <SectionHeader title={section2Data.title} subtitle={section2Data.subtitle} />
             <SectionTabs names={tabNames} changeTabData={changeTabData} />
             <SectionRooms roomList={section2Data.dest_list?.[name]} itemWidth='33.33%' />
+            <SectionFooter name={name}/>
         </SectionWrapper>
     )
 })
