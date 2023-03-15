@@ -4,12 +4,17 @@ import RoomWrapper from './style';
 import RoomItem from '../room-item';
 
 const SectionRooms = memo((props) => {
-    let { roomList } = props;
+    let { roomList, itemWidth } = props;
+    //下面三行代码是按照每行item显示数量，计算并进行截取
+    let eachNum = Math.floor(1 / (itemWidth.replace('%', '') / 100));
+    let roomListLength = roomList?.length;
+    let sliceNum = roomListLength % eachNum;
+    
     return (
         <RoomWrapper>
-            {roomList?.map(item => {
+            {roomList?.slice(0, roomListLength - sliceNum).map(item => {
                 return (
-                    <RoomItem key={item.id} itemData={item}></RoomItem>
+                    <RoomItem key={item.id} itemData={item} itemWidth={itemWidth}></RoomItem>
                 )
             })}
         </RoomWrapper>

@@ -6,11 +6,11 @@ import SectionHeader from '@/components/section-header';
 import SectionRooms from '@/components/section-rooms';
 
 const HomeSection1 = memo((props) => {
-    let { goodPriceInfo } = props;
+    let { sectionData, itemWidth } = props;
     return (
         <SectionWrapper>
-            <SectionHeader title={goodPriceInfo.title} subtitle={goodPriceInfo.subtitle} />
-            <SectionRooms roomList={goodPriceInfo.list} />
+            <SectionHeader title={sectionData.title} subtitle={sectionData.subtitle} itemWidth={itemWidth} />
+            <SectionRooms roomList={sectionData.list} itemWidth={itemWidth} />
         </SectionWrapper>
     )
 })
