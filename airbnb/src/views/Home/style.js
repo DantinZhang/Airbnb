@@ -5,7 +5,7 @@ const HomeWrapper = styled.div`
         width: 1500px;
         margin: 30px auto 0;
         > div {
-            margin-top: 30px;
+            margin-top: 66px;
         }
     }
 `
