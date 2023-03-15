@@ -7,9 +7,9 @@ import FooterWrapper from './style'
 const SectionFooter = memo((props) => {
     let { name } = props;
     return (
-        <FooterWrapper>
+        <FooterWrapper color={name ? "#00848A": "#000"}>
             <div className='info'>
-                <span className='text'>显示更多{name}房源</span>
+                <span className='text'>{name ? `显示更多${name}房源` : '显示全部'}</span>
                 <IconMoreArrow />
             </div>
         </FooterWrapper>
