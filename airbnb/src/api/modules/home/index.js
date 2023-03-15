@@ -1,9 +1,9 @@
 //本文件用于写首页部分的接口
-import hyRequest from "@/api";
+import zyRequest from "@/api";
 
 //高分房源
 export const reqHighScoreInfo = () => {
-    return hyRequest.request({
+    return zyRequest.request({
         method: 'get',
         url: '/home/highscore',
     })
@@ -11,7 +11,7 @@ export const reqHighScoreInfo = () => {
 
 //高性价比房源
 export const reqGoodPriceInfo = () => {
-    return hyRequest.request({
+    return zyRequest.request({
         method: 'get',
         url: '/home/goodprice',
     })
@@ -19,8 +19,16 @@ export const reqGoodPriceInfo = () => {
 
 //折扣数据
 export const reqDiscountInfo = () => {
-    return hyRequest.request({
+    return zyRequest.request({
         method: 'get',
         url: '/home/discount',
+    })
+}
+
+//热门推荐
+export const reqHotInfo = () => {
+    return zyRequest.request({
+        method: 'get',
+        url: '/home/hotrecommenddest'
     })
 }
