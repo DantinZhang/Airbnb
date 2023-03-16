@@ -19,40 +19,53 @@ const ScrollView = memo((props) => {
     //只有子元素改变的时候，才需要重新执行useEffect重新计算可滚动距离
   }, [props.children])
 
-  //右边按钮的点击事件处理
-  function handleClickRight() {
-    let box = fatherBox.current;
-    let el = box.children[elIndex + 1]; //拿到要计算滚动距离的元素
-    let scrollUnit = el.offsetLeft; //计算要滚动的距离（当前元素距离定位元素左边的距离）
-    box.style.transform = `translate(-${scrollUnit}px)`; //通过这种方式滚动
-    setElIndex(elIndex + 1); //改变当前顶头的元素索引
+  // //右边按钮的点击事件处理
+  // function handleClickRight() {
+  //   let box = fatherBox.current;
+  //   let el = box.children[elIndex + 1]; //拿到要计算滚动距离的元素
+  //   let scrollUnit = el.offsetLeft; //计算要滚动的距离（当前元素距离定位元素左边的距离）
+  //   box.style.transform = `translate(-${scrollUnit}px)`; //通过这种方式滚动
+  //   setElIndex(elIndex + 1); //改变当前顶头的元素索引
 
-    //如果滚动距离已经大于可滚动距离，就不显示（已经没有距离可以滚了）
+  //   //如果滚动距离已经大于可滚动距离，就不显示（已经没有距离可以滚了）
+  //   setShowRight(!(scrollUnit > distance));
+
+  //   //只要滚出去了，左边按钮就要显示
+  //   setShowLeft(scrollUnit > 0);
+  // }
+
+  // //左边按钮的点击事件处理
+  // function handleClickLeft() {
+  //   let box = fatherBox.current;
+  //   let el = box.children[elIndex - 1];
+  //   let scrollUnit = el.offsetLeft; //计算要滚动的距离（当前元素距离定位元素左边的距离）
+  //   box.style.transform = `translate(-${scrollUnit}px)`; //通过这种方式滚动
+  //   setElIndex(elIndex - 1);//改变当前顶头的元素索引
+
+  //   //如果滚动距离已经大于可滚动距离，就不显示（已经没有距离可以滚了）
+  //   setShowRight(!(scrollUnit > distance))
+
+  //   //只要滚出去了，左边按钮就要显示
+  //   setShowLeft(scrollUnit > 0);
+  // }
+
+  function handleBtnClick(isRight) {
+    let newIndex = isRight ? elIndex + 1 : elIndex - 1;
+    let box = fatherBox.current;
+    let el = box?.children?.[newIndex];
+    let scrollUnit = el.offsetLeft;
+    box.style.transform = `translate(-${scrollUnit}px)`;
+    setElIndex(newIndex);
+
     setShowRight(!(scrollUnit > distance));
 
-    //只要滚出去了，左边按钮就要显示
-    setShowLeft(scrollUnit > 0);
-  }
-
-  //左边按钮的点击事件处理
-  function handleClickLeft() {
-    let box = fatherBox.current;
-    let el = box.children[elIndex - 1];
-    let scrollUnit = el.offsetLeft; //计算要滚动的距离（当前元素距离定位元素左边的距离）
-    box.style.transform = `translate(-${scrollUnit}px)`; //通过这种方式滚动
-    setElIndex(elIndex - 1);//改变当前顶头的元素索引
-
-    //如果滚动距离已经大于可滚动距离，就不显示（已经没有距离可以滚了）
-    setShowRight(!(scrollUnit > distance))
-
-    //只要滚出去了，左边按钮就要显示
     setShowLeft(scrollUnit > 0);
   }
 
   return (
     <ScrollWrapper>
-      {showLeft && <button onClick={handleClickLeft}>左边按钮</button>}
-      {showRight && <button onClick={handleClickRight}>右边按钮</button>}
+      {showLeft && <button onClick={e => handleBtnClick(false)}>左边按钮</button>}
+      {showRight && <button onClick={e => handleBtnClick(true)}>右边按钮</button>}
 
       <div className='scroll-content' ref={fatherBox}>
         {props.children}
