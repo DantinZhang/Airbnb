@@ -36,7 +36,6 @@ export const reqHomeData = createAsyncThunk('homedata', (payload, context) => {
     })
     //6.更多房源数据
     reqPlusInfo().then(res => {
-        console.log(res)
         context.dispatch(getPlusInfo(res))
     })
 })

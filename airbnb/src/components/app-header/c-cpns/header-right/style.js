@@ -29,6 +29,7 @@ const RightWrapper = styled.div`
 
   .profile {
     position: relative;
+    z-index: 99;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
