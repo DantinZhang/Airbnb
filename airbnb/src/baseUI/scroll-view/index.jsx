@@ -1,3 +1,5 @@
+import IconArrowLeft from '@/assets/svg/icon-arrow-left';
+import IconArrowRight from '@/assets/svg/icon-arrow-right';
 import PropTypes from 'prop-types'
 import React, { memo, useEffect, useRef, useState } from 'react'
 import ScrollWrapper from './style'
@@ -64,11 +66,20 @@ const ScrollView = memo((props) => {
 
   return (
     <ScrollWrapper>
-      {showLeft && <button onClick={e => handleBtnClick(false)}>左边按钮</button>}
-      {showRight && <button onClick={e => handleBtnClick(true)}>右边按钮</button>}
+      {showLeft && (
+        <div className='control left' onClick={e => handleBtnClick(false)}>
+          <IconArrowLeft />
+        </div>)}
+      {showRight && (
+        <div className='control right' onClick={e => handleBtnClick(true)}>
+          <IconArrowRight />
+        </div>
+      )}
 
-      <div className='scroll-content' ref={fatherBox}>
-        {props.children}
+      <div className='hidden'>
+        <div className='scroll-content' ref={fatherBox}>
+          {props.children}
+        </div>
       </div>
 
     </ScrollWrapper>
