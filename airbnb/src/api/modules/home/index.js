@@ -32,3 +32,11 @@ export const reqHotInfo = () => {
         url: '/home/hotrecommenddest'
     })
 }
+
+//向往城市
+export const reqLongforInfo = () => {
+    return zyRequest.request({
+        method: 'get',
+        url: '/home/longfor'
+    })
+}

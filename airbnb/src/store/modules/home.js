@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { reqDiscountInfo, reqGoodPriceInfo, reqHighScoreInfo, reqHotInfo } from '@/api/modules/home'
+import {
+    reqDiscountInfo,
+    reqGoodPriceInfo,
+    reqHighScoreInfo,
+    reqHotInfo,
+    reqLongforInfo
+} from '@/api/modules/home'
 
 export const reqHomeData = createAsyncThunk('homedata', (payload, context) => {
     // let result = await reqHighScoreInfo();
@@ -21,8 +27,12 @@ export const reqHomeData = createAsyncThunk('homedata', (payload, context) => {
     })
     //4.热门推荐数据
     reqHotInfo().then(res => {
-        console.log(res);
         context.dispatch(getHotInfo(res));
+    })
+    //5.向往城市数据
+    reqLongforInfo().then(res => {
+        console.log(res)
+        context.dispatch(getLongforInfo(res))
     })
 })
 
@@ -32,7 +42,8 @@ const homeSlice = createSlice({
         highScoreInfo: {},
         goodPriceInfo: {},
         discountInfo: {},
-        hotInfo:{},
+        hotInfo: {},
+        longforInfo: {},
     },
     reducers: {
         getHighScoreInfo(state, action) {
@@ -41,11 +52,14 @@ const homeSlice = createSlice({
         getGoodPriceInfo(state, { payload }) {
             state.goodPriceInfo = payload;
         },
-        getDiscountInfo(state, {payload}) {
+        getDiscountInfo(state, { payload }) {
             state.discountInfo = payload;
         },
-        getHotInfo(state, {payload}) {
+        getHotInfo(state, { payload }) {
             state.hotInfo = payload;
+        },
+        getLongforInfo(state, { payload }) {
+            state.longforInfo = payload;
         }
     },
 
@@ -59,11 +73,12 @@ const homeSlice = createSlice({
     // }
 })
 
-export const { 
-    getHighScoreInfo, 
+export const {
+    getHighScoreInfo,
     getGoodPriceInfo,
     getDiscountInfo,
     getHotInfo,
+    getLongforInfo,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

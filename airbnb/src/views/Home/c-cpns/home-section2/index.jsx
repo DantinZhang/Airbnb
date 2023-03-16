@@ -18,7 +18,6 @@ const HomeSection2 = memo((props) => {
     
     //把所有名字传给组件，方便tab展示
     let tabNames = section2Data.dest_list && Object.keys(section2Data.dest_list);
-    console.log(tabNames);
 
     //useCallback性能优化，传给tab一个函数，拿到当前点击的name
     const changeTabData = useCallback(function (name) {
