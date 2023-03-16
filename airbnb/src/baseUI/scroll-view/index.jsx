@@ -5,6 +5,8 @@ import ScrollWrapper from './style'
 const ScrollView = memo((props) => {
   let fatherBox = useRef();
   let [distance, setDistance] = useState(0); //可以滚动的距离
+  let [elIndex, setElIndex] = useState(1); //要滚动的元素索引
+  let [showRight, setShowRight] = useState(true); //是否显示右边的按钮
 
   // 组件渲染完毕后才能拿到ref
   useEffect(() => {
@@ -16,10 +18,21 @@ const ScrollView = memo((props) => {
     //只有子元素改变的时候，才需要重新执行useEffect重新计算可滚动距离
   },[props.children])
 
+  //右边按钮的点击事件处理
+  function handleClickRight() {
+    let box = fatherBox.current;
+    let el = box.children[elIndex]; //拿到要计算滚动距离的元素
+    let scrollUnit = el.offsetLeft; //计算要滚动的距离（当前元素距离定位元素左边的距离）
+    box.style.transform = `translate(-${scrollUnit}px)`; //通过这种方式滚动
+    setElIndex(elIndex + 1); //准备好计算下一个滚动距离
+
+    setShowRight(!(scrollUnit > distance)); //如果滚动距离已经大于可滚动距离，就不显示
+  }
+
   return (
     <ScrollWrapper>
       <button>左边按钮</button>
-      <button>右边按钮</button>
+      {showRight && <button onClick={handleClickRight}>右边按钮</button>}
 
       <div className='scroll-content' ref={fatherBox}>
         {props.children}
