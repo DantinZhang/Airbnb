@@ -7,16 +7,18 @@ import HomeWrapper from './style';
 import HomeSection1 from './c-cpns/home-section1';
 import HomeSection2 from './c-cpns/home-section2';
 import HomeLongfor from './c-cpns/home-longfor';
+import HomeSection3 from './c-cpns/home-section3';
 
 const Home = memo(() => {
   let dispatch = useDispatch();
-  let { highScoreInfo, goodPriceInfo, discountInfo, hotInfo, longforInfo } = useSelector((state) => {
+  let { highScoreInfo, goodPriceInfo, discountInfo, hotInfo, longforInfo, plusInfo } = useSelector((state) => {
     return {
       highScoreInfo: state.home.highScoreInfo,
       goodPriceInfo: state.home.goodPriceInfo,
       discountInfo: state.home.discountInfo,
       hotInfo: state.home.hotInfo,
       longforInfo: state.home.longforInfo,
+      plusInfo: state.home.plusInfo,
     }
   }, shallowEqual)
 
@@ -34,6 +36,7 @@ const Home = memo(() => {
         {Object.keys(highScoreInfo).length > 0 && <HomeSection1 sectionData={highScoreInfo} itemWidth='20%' />}
         {Object.keys(goodPriceInfo).length > 0 && <HomeSection1 sectionData={goodPriceInfo} itemWidth='25%' />}
         {Object.keys(longforInfo).length > 0 && <HomeLongfor longforData={longforInfo}/>}
+        {Object.keys(plusInfo).length > 0 && <HomeSection3 sectionData={plusInfo}/>}
       </div>
     </HomeWrapper>
   )

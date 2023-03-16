@@ -40,3 +40,11 @@ export const reqLongforInfo = () => {
         url: '/home/longfor'
     })
 }
+
+//plus房源
+export const reqPlusInfo = () => {
+    return zyRequest.request({
+        method:'get',
+        url: '/home/plus'
+    })
+}

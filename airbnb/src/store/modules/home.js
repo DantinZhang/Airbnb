@@ -5,7 +5,8 @@ import {
     reqGoodPriceInfo,
     reqHighScoreInfo,
     reqHotInfo,
-    reqLongforInfo
+    reqLongforInfo,
+    reqPlusInfo,
 } from '@/api/modules/home'
 
 export const reqHomeData = createAsyncThunk('homedata', (payload, context) => {
@@ -31,8 +32,12 @@ export const reqHomeData = createAsyncThunk('homedata', (payload, context) => {
     })
     //5.向往城市数据
     reqLongforInfo().then(res => {
-        console.log(res)
         context.dispatch(getLongforInfo(res))
+    })
+    //6.更多房源数据
+    reqPlusInfo().then(res => {
+        console.log(res)
+        context.dispatch(getPlusInfo(res))
     })
 })
 
@@ -44,6 +49,7 @@ const homeSlice = createSlice({
         discountInfo: {},
         hotInfo: {},
         longforInfo: {},
+        plusInfo: {}
     },
     reducers: {
         getHighScoreInfo(state, action) {
@@ -60,6 +66,9 @@ const homeSlice = createSlice({
         },
         getLongforInfo(state, { payload }) {
             state.longforInfo = payload;
+        },
+        getPlusInfo(state, {payload}) {
+            state.plusInfo = payload;
         }
     },
 
@@ -79,6 +88,7 @@ export const {
     getDiscountInfo,
     getHotInfo,
     getLongforInfo,
+    getPlusInfo,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;
