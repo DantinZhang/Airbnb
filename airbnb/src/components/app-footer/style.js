@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
-  margin-top: 100px;
+  margin-top: 66px;
   border-top: 1px solid #EBEBEB;
 
   .wrapper {

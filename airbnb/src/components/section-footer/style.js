@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const FooterWrapper = styled.div`
   display: flex;
-  margin-top: 10px;
 
   .info {
     display: flex;
