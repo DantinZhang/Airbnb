@@ -27,6 +27,9 @@ const SectionTabs = memo((props) => {
                         </div>
                     )
                 })}
+                <div className='item'>北京</div>
+                <div className='item'>上海</div>
+                <div className='item'>石家庄</div>
             </ScrollView>
         </TabsWrapper>
     )
