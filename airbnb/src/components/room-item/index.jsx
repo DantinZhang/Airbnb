@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { memo } from 'react'
+import React, { memo, useRef } from 'react'
 
 import ItemWrapper from './style';
 import { Carousel, Rate } from 'antd';
@@ -9,6 +9,12 @@ import IconArrowRight from '@/assets/svg/icon-arrow-right';
 const RoomItem = memo((props) => {
     // itemWidth参数用于决定当前一行几个元素
     let { itemData, itemWidth } = props;
+    let carousel = useRef();
+
+    function controlClickHandle(isRight) {
+        //控制前后切换的按钮
+        isRight ? carousel.current.next() : carousel.current.prev();
+    }
 
     return (
         <ItemWrapper
@@ -21,7 +27,15 @@ const RoomItem = memo((props) => {
                 </div> */}
                 {/* 换成轮播图 */}
                 <div className="swiper">
-                    <Carousel>
+                    <div className='control'>
+                        <div className='btn left' onClick={e => controlClickHandle(false, e)}>
+                            <IconArrowLeft width="30" height="30" />
+                        </div>
+                        <div className='btn right' onClick={e => controlClickHandle(true, e)}>
+                            <IconArrowRight width="30" height="30" />
+                        </div>
+                    </div>
+                    <Carousel ref={carousel} dots={false}>
                         {
                             itemData.picture_urls.map((url, index) => {
                                 return (

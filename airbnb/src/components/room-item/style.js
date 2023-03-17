@@ -33,7 +33,7 @@ const ItemWrapper = styled.div`
     }
   }
 
-  .slider {
+  .swiper {
     position: relative;
     cursor: pointer;
 
