@@ -2,19 +2,36 @@ import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 import ItemWrapper from './style';
-import { Rate } from 'antd';
+import { Carousel, Rate } from 'antd';
+import IconArrowLeft from '@/assets/svg/icon-arrow-left';
+import IconArrowRight from '@/assets/svg/icon-arrow-right';
 
 const RoomItem = memo((props) => {
     // itemWidth参数用于决定当前一行几个元素
     let { itemData, itemWidth } = props;
+
     return (
         <ItemWrapper
             verifyColor={itemData?.verify_info?.text_color || "#39576a"}
             itemWidth={itemWidth}
         >
             <div className='inner'>
-                <div className='cover'>
+                {/* <div className='cover'>
                     <img src={itemData.picture_url} alt="" />
+                </div> */}
+                {/* 换成轮播图 */}
+                <div className="swiper">
+                    <Carousel>
+                        {
+                            itemData.picture_urls.map((url, index) => {
+                                return (
+                                    <div key={index} className="cover">
+                                        <img src={url} alt="" />
+                                    </div>
+                                )
+                            })
+                        }
+                    </Carousel>
                 </div>
                 <div className='desc'>
                     {itemData.verify_info.messages.join(" · ")}
@@ -23,7 +40,7 @@ const RoomItem = memo((props) => {
                 <div className='price'>¥{itemData.price}/晚</div>
 
                 <div className='bottom'>
-                    <Rate disabled defaultValue={5}/>
+                    <Rate disabled defaultValue={5} />
                     <span className='count'>{itemData.reviews_count}</span>
                     {
                         itemData.bottom_info && <span className='extra'>·{itemData.bottom_info.content}</span>

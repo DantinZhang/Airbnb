@@ -18,6 +18,7 @@ const Entire = memo(() => {
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(reqRoomList())
+    window.scrollTo(0, 0)  //到页面顶部
   }, [])
 
   return (
