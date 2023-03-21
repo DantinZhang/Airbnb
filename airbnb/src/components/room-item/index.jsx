@@ -29,6 +29,7 @@ const RoomItem = memo((props) => {
             let newIndex = carouselIndex == 0 ? length - 1 : carouselIndex - 1;
             setCarouselIndex(newIndex);
         }
+        e.stopPropagation();//阻止事件冒泡，否则会冒泡到跳转
     }
 
     //路由跳转直详情页（这里由于没有接口，不传参了，采用写死的默认值）
