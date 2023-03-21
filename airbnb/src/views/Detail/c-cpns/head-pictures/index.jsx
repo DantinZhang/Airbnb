@@ -1,3 +1,4 @@
+import PictureBrowser from '@/baseUI/picture-browser'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 import PicturesWrapper from './style'
@@ -86,6 +87,8 @@ const Pictures = memo((props) => {
                 </div>
             </div>
             <div className='show-btn'>显示照片</div>
+
+            <PictureBrowser />
         </PicturesWrapper>
     )
 })
