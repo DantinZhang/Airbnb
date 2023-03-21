@@ -15,13 +15,16 @@ const RoomItem = memo((props) => {
     let [carouselIndex, setCarouselIndex] = useState(0);
 
     function controlClickHandle(isRight) {
+        let length = itemData?.picture_urls.length;
         //控制前后切换的按钮
         if (isRight) {
             carousel.current.next();
-            setCarouselIndex(carouselIndex + 1);
+            let newIndex = carouselIndex == length - 1 ? 0 : carouselIndex + 1;
+            setCarouselIndex(newIndex);
         } else {
             carousel.current.prev();
-            setCarouselIndex(carouselIndex - 1);
+            let newIndex = carouselIndex == 0 ? length - 1 : carouselIndex - 1;
+            setCarouselIndex(newIndex);
         }
     }
 
