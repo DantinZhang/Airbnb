@@ -3,19 +3,15 @@ import React, { memo } from 'react'
 import PicturesWrapper from './style'
 
 const Pictures = memo((props) => {
-    let defaultInfo = {
+    let detailInfo = {
         "_id": "63043046432f9033d45410dc",
         "id": "49165669",
         "picture_url": "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/11aa11ee-e01f-4a53-8ba5-26de2e69502c.jpeg?aki_policy=large",
         "picture_urls": [
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/11aa11ee-e01f-4a53-8ba5-26de2e69502c.jpeg?aki_policy=large",
-            "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/6cd1f284-c970-4822-b63e-74d9c8dcc188.jpeg?aki_policy=large",
-            "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/b05f8093-d099-4556-bec1-05a123840565.jpeg?aki_policy=large",
-            "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/affebcd2-2c92-47f8-89ef-6c6c10ee156a.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/350f6b5c-d1b2-4346-8708-c9a65fe388b9.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/dfa54e99-48c1-42e4-8875-b4b5d0be63fe.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/3250244b-dcb1-417d-8543-c51b65418d78.jpeg?aki_policy=large",
-            "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/15cbbe6e-ee45-4da6-bbb6-05318eda48d7.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/9f0f1ad6-2074-4704-a3da-fb0976297cb6.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/a400860b-d132-44d3-b7c1-4c47a6640265.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/45e59644-bbc9-4fb4-a885-efae1f13d44f.jpeg?aki_policy=large",
@@ -68,7 +64,29 @@ const Pictures = memo((props) => {
         "image_url": "/moreitems/ad0e5254433cb33ad77a035475f10782.jpg"
     }
     return (
-        <PicturesWrapper>图片们</PicturesWrapper>
+        <PicturesWrapper>
+            <div className='pictures'>
+                <div className='left'>
+                    <div className='item'>
+                        <img src={detailInfo?.picture_urls[0]} alt="" />
+                        <div className='cover'></div>
+                    </div>
+                </div>
+                <div className='right'>
+                    {
+                        detailInfo?.picture_urls?.slice(1, 5).map((item,index) => {
+                            return (
+                                <div className='item' key={index}>
+                                    <img src={item} alt="" />
+                                    <div className='cover'></div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <div className='show-btn'>显示照片</div>
+        </PicturesWrapper>
     )
 })
 
