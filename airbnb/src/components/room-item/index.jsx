@@ -1,19 +1,28 @@
 import PropTypes from 'prop-types'
-import React, { memo, useRef } from 'react'
+import React, { memo, useRef, useState } from 'react'
 
 import ItemWrapper from './style';
 import { Carousel, Rate } from 'antd';
 import IconArrowLeft from '@/assets/svg/icon-arrow-left';
 import IconArrowRight from '@/assets/svg/icon-arrow-right';
+import Indicator from '@/baseUI/indicator';
+import classNames from 'classnames';
 
 const RoomItem = memo((props) => {
     // itemWidth参数用于决定当前一行几个元素
     let { itemData, itemWidth } = props;
     let carousel = useRef();
+    let [carouselIndex, setCarouselIndex] = useState(0);
 
     function controlClickHandle(isRight) {
         //控制前后切换的按钮
-        isRight ? carousel.current.next() : carousel.current.prev();
+        if (isRight) {
+            carousel.current.next();
+            setCarouselIndex(carouselIndex + 1);
+        } else {
+            carousel.current.prev();
+            setCarouselIndex(carouselIndex - 1);
+        }
     }
 
     //分情况展示，首页不展示轮播图，完整页展示轮播图
@@ -21,27 +30,44 @@ const RoomItem = memo((props) => {
         <img src={itemData.picture_url} alt="" />
     </div>)
 
-    let entireItem = (<div className="swiper">
-        <div className='control'>
-            <div className='btn left' onClick={e => controlClickHandle(false, e)}>
-                <IconArrowLeft width="30" height="30" />
+    let entireItem = (
+        <div className="swiper">
+            {/* 左右按钮 */}
+            <div className='control'>
+                <div className='btn left' onClick={e => controlClickHandle(false, e)}>
+                    <IconArrowLeft width="30" height="30" />
+                </div>
+                <div className='btn right' onClick={e => controlClickHandle(true, e)}>
+                    <IconArrowRight width="30" height="30" />
+                </div>
             </div>
-            <div className='btn right' onClick={e => controlClickHandle(true, e)}>
-                <IconArrowRight width="30" height="30" />
+            {/* 轮播图 */}
+            <Carousel ref={carousel} dots={false}>
+                {
+                    itemData?.picture_urls.map((url, index) => {
+                        return (
+                            <div key={index} className="cover">
+                                <img src={url} alt="" />
+                            </div>
+                        )
+                    })
+                }
+            </Carousel>
+            {/* 切换的小点点 */}
+            <div className="indicator">
+                <Indicator selectIndex={carouselIndex}>
+                    {
+                        itemData?.picture_urls.map((item, index) => {
+                            return (
+                                <div className='item' key={index}>
+                                    <div className={classNames('dot', { active: carouselIndex == index })}></div>
+                                </div>
+                            )
+                        })
+                    }
+                </Indicator>
             </div>
-        </div>
-        <Carousel ref={carousel} dots={false}>
-            {
-                itemData.picture_urls?.map((url, index) => {
-                    return (
-                        <div key={index} className="cover">
-                            <img src={url} alt="" />
-                        </div>
-                    )
-                })
-            }
-        </Carousel>
-    </div>)
+        </div>)
 
     return (
         <ItemWrapper
@@ -49,8 +75,9 @@ const RoomItem = memo((props) => {
             itemWidth={itemWidth}
         >
             <div className='inner'>
+                {/* 图片的展示方式 */}
                 {itemData.picture_urls ? entireItem : homeItem}
-                
+
                 <div className='desc'>
                     {itemData.verify_info.messages.join(" · ")}
                 </div>
