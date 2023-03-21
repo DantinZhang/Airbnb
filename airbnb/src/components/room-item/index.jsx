@@ -16,37 +16,41 @@ const RoomItem = memo((props) => {
         isRight ? carousel.current.next() : carousel.current.prev();
     }
 
+    //分情况展示，首页不展示轮播图，完整页展示轮播图
+    let homeItem = (<div className='cover'>
+        <img src={itemData.picture_url} alt="" />
+    </div>)
+
+    let entireItem = (<div className="swiper">
+        <div className='control'>
+            <div className='btn left' onClick={e => controlClickHandle(false, e)}>
+                <IconArrowLeft width="30" height="30" />
+            </div>
+            <div className='btn right' onClick={e => controlClickHandle(true, e)}>
+                <IconArrowRight width="30" height="30" />
+            </div>
+        </div>
+        <Carousel ref={carousel} dots={false}>
+            {
+                itemData.picture_urls?.map((url, index) => {
+                    return (
+                        <div key={index} className="cover">
+                            <img src={url} alt="" />
+                        </div>
+                    )
+                })
+            }
+        </Carousel>
+    </div>)
+
     return (
         <ItemWrapper
             verifyColor={itemData?.verify_info?.text_color || "#39576a"}
             itemWidth={itemWidth}
         >
             <div className='inner'>
-                {/* <div className='cover'>
-                    <img src={itemData.picture_url} alt="" />
-                </div> */}
-                {/* 换成轮播图 */}
-                <div className="swiper">
-                    <div className='control'>
-                        <div className='btn left' onClick={e => controlClickHandle(false, e)}>
-                            <IconArrowLeft width="30" height="30" />
-                        </div>
-                        <div className='btn right' onClick={e => controlClickHandle(true, e)}>
-                            <IconArrowRight width="30" height="30" />
-                        </div>
-                    </div>
-                    <Carousel ref={carousel} dots={false}>
-                        {
-                            itemData.picture_urls.map((url, index) => {
-                                return (
-                                    <div key={index} className="cover">
-                                        <img src={url} alt="" />
-                                    </div>
-                                )
-                            })
-                        }
-                    </Carousel>
-                </div>
+                {itemData.picture_urls ? entireItem : homeItem}
+                
                 <div className='desc'>
                     {itemData.verify_info.messages.join(" · ")}
                 </div>
