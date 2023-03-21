@@ -7,14 +7,17 @@ import IconArrowLeft from '@/assets/svg/icon-arrow-left';
 import IconArrowRight from '@/assets/svg/icon-arrow-right';
 import Indicator from '@/baseUI/indicator';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 const RoomItem = memo((props) => {
     // itemWidth参数用于决定当前一行几个元素
     let { itemData, itemWidth } = props;
     let carousel = useRef();
     let [carouselIndex, setCarouselIndex] = useState(0);
+    let navigate = useNavigate();
 
-    function controlClickHandle(isRight) {
+    //点击左右侧按钮切换轮播
+    function controlClickHandle(isRight,e) {
         let length = itemData?.picture_urls.length;
         //控制前后切换的按钮
         if (isRight) {
@@ -26,6 +29,11 @@ const RoomItem = memo((props) => {
             let newIndex = carouselIndex == 0 ? length - 1 : carouselIndex - 1;
             setCarouselIndex(newIndex);
         }
+    }
+
+    //路由跳转直详情页（这里由于没有接口，不传参了，采用写死的默认值）
+    function toDetail() {
+        navigate('/detail')
     }
 
     //分情况展示，首页不展示轮播图，完整页展示轮播图
@@ -47,7 +55,7 @@ const RoomItem = memo((props) => {
             {/* 轮播图 */}
             <Carousel ref={carousel} dots={false}>
                 {
-                    itemData?.picture_urls.map((url, index) => {
+                    itemData?.picture_urls?.map((url, index) => {
                         return (
                             <div key={index} className="cover">
                                 <img src={url} alt="" />
@@ -60,7 +68,7 @@ const RoomItem = memo((props) => {
             <div className="indicator">
                 <Indicator selectIndex={carouselIndex}>
                     {
-                        itemData?.picture_urls.map((item, index) => {
+                        itemData?.picture_urls?.map((item, index) => {
                             return (
                                 <div className='item' key={index}>
                                     <div className={classNames('dot', { active: carouselIndex == index })}></div>
@@ -76,6 +84,7 @@ const RoomItem = memo((props) => {
         <ItemWrapper
             verifyColor={itemData?.verify_info?.text_color || "#39576a"}
             itemWidth={itemWidth}
+            onClick={e => toDetail()}
         >
             <div className='inner'>
                 {/* 图片的展示方式 */}
