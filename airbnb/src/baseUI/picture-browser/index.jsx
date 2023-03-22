@@ -23,10 +23,12 @@ const PictureBrowser = memo((props) => {
         }
     }, [])
 
+    //关闭按钮
     function closePic() {
         if (handleShowPic) handleShowPic(false);
     }
 
+    //点击左右按钮
     function handleChangePic(isRight) {
         let newIndex = isRight ? currentIndex + 1 : currentIndex - 1;
         if (newIndex > pictureUrls.length - 1) newIndex = 0;
@@ -34,8 +36,14 @@ const PictureBrowser = memo((props) => {
         setCurrentIndex(newIndex);
     }
 
+    //点击下面的隐藏列表按钮
     function isShowList(isShow) {
         setShowList(isShow)
+    }
+
+    //点击底部列表任意一张图片
+    function handleRandomClick(index) {
+        setCurrentIndex(index)
     }
 
     return (
@@ -75,7 +83,10 @@ const PictureBrowser = memo((props) => {
                             {
                                 pictureUrls.map((item, index) => {
                                     return (
-                                        <div className={classNames('item', { active: currentIndex == index })} key={index}>
+                                        <div
+                                            className={classNames('item', { active: currentIndex == index })} key={index}
+                                            onClick={e => handleRandomClick(index)}
+                                        >
                                             <img src={item} alt="" />
                                         </div>
                                     )
