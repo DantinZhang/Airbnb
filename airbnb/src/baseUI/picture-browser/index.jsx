@@ -8,7 +8,7 @@ import React, { memo, useEffect } from 'react'
 import BrowserWrapper from './style'
 
 const PictureBrowser = memo((props) => {
-    let { pictureUrls } = props;
+    let { pictureUrls, handleShowPic } = props;
 
     useEffect(() => {
         //图片浏览器渲染完成后，隐藏滚动条
@@ -19,10 +19,14 @@ const PictureBrowser = memo((props) => {
         }
     }, [])
 
+    function closePic() {
+        if(handleShowPic) handleShowPic(false);
+    }
+
     return (
         <BrowserWrapper>
             <div className='top'>
-                <div className='close-btn'>
+                <div className='close-btn' onClick={closePic}>
                     <IconClose />
                 </div>
             </div>
