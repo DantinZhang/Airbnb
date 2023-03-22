@@ -3,6 +3,7 @@ import IconArrowRight from '@/assets/svg/icon-arrow-right';
 import IconClose from '@/assets/svg/icon-close';
 import IconTriangleArrowBottom from '@/assets/svg/icon-triangle-arrow-bottom';
 import IconTriangleArrowTop from '@/assets/svg/icon-triangle-arrow-top';
+import classNames from 'classnames';
 import PropTypes from 'prop-types'
 import React, { memo, useEffect, useState } from 'react'
 import Indicator from '../indicator';
@@ -25,6 +26,13 @@ const PictureBrowser = memo((props) => {
         if (handleShowPic) handleShowPic(false);
     }
 
+    function handleChangePic(isRight) {
+        let newIndex = isRight ? currentIndex + 1 : currentIndex - 1;
+        if(newIndex > pictureUrls.lenght - 1) newIndex = 0;
+        if(newIndex < 0) newIndex = pictureUrls.length - 1;
+        setCurrentIndex(newIndex);
+    }
+
     return (
         <BrowserWrapper showList={true}>
             <div className='top'>
@@ -34,10 +42,10 @@ const PictureBrowser = memo((props) => {
             </div>
             <div className='slider'>
                 <div className='control'>
-                    <div className='btn left'>
+                    <div className='btn left' onClick={e => handleChangePic(false)}>
                         <IconArrowLeft width="77" height="77" />
                     </div>
-                    <div className='btn right'>
+                    <div className='btn right' onClick={e => handleChangePic(true)}>
                         <IconArrowRight width="77" height="77" />
                     </div>
                 </div>
@@ -62,7 +70,7 @@ const PictureBrowser = memo((props) => {
                             {
                                 pictureUrls.map((item, index) => {
                                     return (
-                                        <div className="item" key={index}>
+                                        <div className={classNames('item', {active: currentIndex == index})} key={index}>
                                             <img src={item} alt="" />
                                         </div>
                                     )
