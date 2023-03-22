@@ -1,9 +1,10 @@
 import PictureBrowser from '@/baseUI/picture-browser'
 import PropTypes from 'prop-types'
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PicturesWrapper from './style'
 
 const Pictures = memo((props) => {
+    let [showBrowser, setShowBrowser] = useState(false);
     let detailInfo = {
         "_id": "63043046432f9033d45410dc",
         "id": "49165669",
@@ -64,6 +65,10 @@ const Pictures = memo((props) => {
         "lng": 113.34489,
         "image_url": "/moreitems/ad0e5254433cb33ad77a035475f10782.jpg"
     }
+
+    function handleShowPic(isShow) {
+        setShowBrowser(isShow)
+    }
     return (
         <PicturesWrapper>
             <div className='pictures'>
@@ -86,9 +91,9 @@ const Pictures = memo((props) => {
                     }
                 </div>
             </div>
-            <div className='show-btn'>显示照片</div>
+            <div className='show-btn' onClick={e => handleShowPic(true)}>显示照片</div>
 
-            <PictureBrowser />
+            {showBrowser && <PictureBrowser />}
         </PicturesWrapper>
     )
 })
