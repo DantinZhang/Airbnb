@@ -4,11 +4,13 @@ import IconClose from '@/assets/svg/icon-close';
 import IconTriangleArrowBottom from '@/assets/svg/icon-triangle-arrow-bottom';
 import IconTriangleArrowTop from '@/assets/svg/icon-triangle-arrow-top';
 import PropTypes from 'prop-types'
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
+import Indicator from '../indicator';
 import BrowserWrapper from './style'
 
 const PictureBrowser = memo((props) => {
     let { pictureUrls, handleShowPic } = props;
+    let [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         //图片浏览器渲染完成后，隐藏滚动条
@@ -20,11 +22,11 @@ const PictureBrowser = memo((props) => {
     }, [])
 
     function closePic() {
-        if(handleShowPic) handleShowPic(false);
+        if (handleShowPic) handleShowPic(false);
     }
 
     return (
-        <BrowserWrapper>
+        <BrowserWrapper showList={true}>
             <div className='top'>
                 <div className='close-btn' onClick={closePic}>
                     <IconClose />
@@ -40,14 +42,15 @@ const PictureBrowser = memo((props) => {
                     </div>
                 </div>
                 <div className='picture'>
+                    <img src={pictureUrls[currentIndex]} alt="" />
                 </div>
             </div>
             <div className='preview'>
                 <div className='info'>
                     <div className='desc'>
                         <div className='count'>
-                            <span>{1}/{pictureUrls}:</span>
-                            <span>room apartment图片{1}</span>
+                            <span>{currentIndex + 1}/{pictureUrls.length}：</span>
+                            <span>公寓图片{currentIndex + 1}</span>
                         </div>
                         <div className='toggle'>
                             <span>{true ? "隐藏" : "显示"}照片列表</span>
@@ -55,7 +58,17 @@ const PictureBrowser = memo((props) => {
                         </div>
                     </div>
                     <div className='list'>
-                        
+                        <Indicator selectIndex={currentIndex}>
+                            {
+                                pictureUrls.map((item, index) => {
+                                    return (
+                                        <div className="item" key={index}>
+                                            <img src={item} alt="" />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </Indicator>
                     </div>
                 </div>
             </div>

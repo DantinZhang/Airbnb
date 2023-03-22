@@ -94,7 +94,7 @@ const Pictures = memo((props) => {
             </div>
             <div className='show-btn' onClick={e => handleShowPic(true)}>显示照片</div>
 
-            {showBrowser && <PictureBrowser handleShowPic={handleShowPic} />}
+            {showBrowser && <PictureBrowser handleShowPic={handleShowPic} pictureUrls={detailInfo.picture_urls} />}
         </PicturesWrapper>
     )
 })
