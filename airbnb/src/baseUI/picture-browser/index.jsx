@@ -12,6 +12,7 @@ import BrowserWrapper from './style'
 const PictureBrowser = memo((props) => {
     let { pictureUrls, handleShowPic } = props;
     let [currentIndex, setCurrentIndex] = useState(0);
+    let [showList, setShowList] = useState(true);
 
     useEffect(() => {
         //图片浏览器渲染完成后，隐藏滚动条
@@ -28,13 +29,17 @@ const PictureBrowser = memo((props) => {
 
     function handleChangePic(isRight) {
         let newIndex = isRight ? currentIndex + 1 : currentIndex - 1;
-        if(newIndex > pictureUrls.lenght - 1) newIndex = 0;
-        if(newIndex < 0) newIndex = pictureUrls.length - 1;
+        if (newIndex > pictureUrls.length - 1) newIndex = 0;
+        if (newIndex < 0) newIndex = pictureUrls.length - 1;
         setCurrentIndex(newIndex);
     }
 
+    function isShowList(isShow) {
+        setShowList(isShow)
+    }
+
     return (
-        <BrowserWrapper showList={true}>
+        <BrowserWrapper showList={showList}>
             <div className='top'>
                 <div className='close-btn' onClick={closePic}>
                     <IconClose />
@@ -60,9 +65,9 @@ const PictureBrowser = memo((props) => {
                             <span>{currentIndex + 1}/{pictureUrls.length}：</span>
                             <span>公寓图片{currentIndex + 1}</span>
                         </div>
-                        <div className='toggle'>
-                            <span>{true ? "隐藏" : "显示"}照片列表</span>
-                            {true ? <IconTriangleArrowBottom /> : <IconTriangleArrowTop />}
+                        <div className='toggle' onClick={e => isShowList(!showList)}>
+                            <span>{showList ? "隐藏" : "显示"}照片列表</span>
+                            {showList ? <IconTriangleArrowBottom /> : <IconTriangleArrowTop />}
                         </div>
                     </div>
                     <div className='list'>
@@ -70,7 +75,7 @@ const PictureBrowser = memo((props) => {
                             {
                                 pictureUrls.map((item, index) => {
                                     return (
-                                        <div className={classNames('item', {active: currentIndex == index})} key={index}>
+                                        <div className={classNames('item', { active: currentIndex == index })} key={index}>
                                             <img src={item} alt="" />
                                         </div>
                                     )

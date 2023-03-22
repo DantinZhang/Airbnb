@@ -35,7 +35,6 @@ const Pictures = memo((props) => {
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/33d49e74-e484-4c0e-9726-754e0047eaad.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/b8800a81-2929-4061-97e0-01b1993087d2.jpeg?aki_policy=large",
             "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/3de6b974-2c98-421e-82e2-bf51b886fda3.jpeg?aki_policy=large",
-            "https://z1.muscache.cn/im/pictures/miso/Hosting-49165669/original/2a223b62-efab-4561-8ce2-37e4e2971d38.jpeg?aki_policy=large"
         ],
         "verify_info": {
             "messages": [
