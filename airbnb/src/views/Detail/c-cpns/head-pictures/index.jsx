@@ -1,5 +1,4 @@
 import PictureBrowser from '@/baseUI/picture-browser'
-import PropTypes from 'prop-types'
 import React, { memo, useCallback, useState } from 'react'
 import PicturesWrapper from './style'
 
@@ -87,7 +86,5 @@ const Pictures = memo((props) => {
         </PicturesWrapper>
     )
 })
-
-Pictures.propTypes = {}
 
 export default Pictures
